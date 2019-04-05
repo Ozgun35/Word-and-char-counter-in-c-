@@ -6,7 +6,7 @@ using namespace std;
 
 int main() {
 	
-	string filename,fortxt,fordoc,fordocx;
+	string filename,fortxt,fordoc,fordocx,line;
 	char ch;
 	int c,w;
 	cout<< "Please enter a file name." <<endl;
@@ -18,29 +18,53 @@ int main() {
 	fordocx=filename+".docx";
 		
 	fstream file( fortxt.c_str() );
-	if(!file)
+	if( !file )
 	{
 		fstream file( fordoc.c_str() );
-		if(!file)
+		if( !file ) 
 		{
 			fstream file( fordocx.c_str() );
-			if(!file)
+			if( !file )
 			{
 				cout<<"This file doesn't exist!";
 			}
 			else
 			{
-				cout<<"file type docx!";
+				if( file.is_open() )
+				{
+					while ( getline ( file, line ))
+					{
+						cout<<line<<endl;
+						c+=line.length();
+					}
+				}
+				//cout<<"file type docx!";
 			}
 		}
 		else
 		{
-			cout<<"file type doc!";
+			if( file.is_open() )
+				{
+					while ( getline ( file, line ))
+					{
+						cout<<line<<endl;
+						c+=line.length();
+					}
+				}
+			//cout<<"file type doc!";
 		}
 	}
 	else
 	{
-		cout<<"file type txt!";
+		if( file.is_open() )
+				{
+					while ( getline ( file, line ))
+					{
+						cout<<line<<endl;
+						c+=line.length();
+					}
+				}
+		//cout<<"file type txt!";
 	}
 	
 	
